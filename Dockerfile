@@ -42,6 +42,7 @@ RUN cd ~; \
 	rm -f /etc/nginx/conf.d/default.conf; \
 	cp -rf /src/files/etc/* /etc/; \
 	cp -rf /src/files/root/* /root/; \
+	cp -rf /src/files/usr/* /usr/; \
 	cp -rf /src/files/var/* /var/; \
 	rm -rf /src/files; \
 	chmod +x /root/run.sh; \
