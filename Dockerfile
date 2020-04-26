@@ -1,4 +1,4 @@
-FROM bayrell/alpine:latest
+FROM bayrell/alpine:3.11
 
 RUN cd ~; \
 	apk update; \
