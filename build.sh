@@ -10,8 +10,8 @@ TAG=`date '+%Y%m%d_%H%M%S'`
 case "$1" in
 	
 	docker)
-		docker build ./ -t bayrell/alpine_php_fpm:7.2-$TAG --file Dockerfile
-		docker tag bayrell/alpine_php_fpm:7.2-$TAG bayrell/alpine_php_fpm:7.2
+		docker build ./ -t bayrell/alpine_php_fpm:7.3-$TAG --file Dockerfile
+		docker tag bayrell/alpine_php_fpm:7.3-$TAG bayrell/alpine_php_fpm:7.3
 	;;
 	
 	*)
