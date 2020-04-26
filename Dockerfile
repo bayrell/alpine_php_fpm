@@ -46,5 +46,3 @@ RUN cd ~; \
 	rm -rf /src/files; \
 	chmod +x /root/run.sh; \
 	echo "Ok"	
-	
-CMD ["/root/run.sh"]
