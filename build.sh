@@ -29,6 +29,11 @@ case "$1" in
 			--amend bayrell/alpine_php_fpm:7.3-$VERSION-amd64 \
 			--amend bayrell/alpine_php_fpm:7.3-$VERSION-arm32v7
 		docker manifest push bayrell/alpine_php_fpm:7.3-$VERSION
+		
+		docker manifest create bayrell/alpine_php_fpm:7.3 \
+			--amend bayrell/alpine_php_fpm:7.3-$VERSION-amd64 \
+			--amend bayrell/alpine_php_fpm:7.3-$VERSION-arm32v7
+		docker manifest push bayrell/alpine_php_fpm:7.3
 	;;
 	
 	all)
