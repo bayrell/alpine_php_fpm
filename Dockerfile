@@ -1,6 +1,5 @@
-FROM --platform=$BUILDPLATFORM alpine:3.11
-ARG TARGETPLATFORM
-ARG BUILDPLATFORM
+ARG ARCH=
+FROM ${ARCH}alpine:3.11
 
 RUN cd ~; \
 	echo "" > /etc/apk/repositories; \
