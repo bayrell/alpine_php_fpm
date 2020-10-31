@@ -10,7 +10,7 @@ TAG=`date '+%Y%m%d_%H%M%S'`
 
 case "$1" in
 	
-	build)
+	test)
 		docker build ./ -t bayrell/alpine_php_fpm:7.3-$VERSION-$TAG --file Dockerfile
 	;;
 	
@@ -43,7 +43,7 @@ case "$1" in
 	;;
 	
 	*)
-		echo "Usage: $0 {build|amd64|arm32v7|manifest|all}"
+		echo "Usage: $0 {amd64|arm32v7|manifest|all|test}"
 		RETVAL=1
 
 esac
