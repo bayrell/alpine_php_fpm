@@ -7,13 +7,11 @@ BASE_PATH=`dirname $SCRIPT_PATH`
 RETVAL=0
 VERSION=1
 TAG=`date '+%Y%m%d_%H%M%S'`
-#linux/arm64/v8,
 
 case "$1" in
 	
 	build)
-		docker build ./ -t bayrell/alpine_php_fpm:7.3-$TAG --file Dockerfile
-		docker tag bayrell/alpine_php_fpm:7.3-$TAG bayrell/alpine_php_fpm:7.3
+		docker build ./ -t bayrell/alpine_php_fpm:7.3-$VERSION-$TAG --file Dockerfile
 	;;
 	
 	amd64)
@@ -23,7 +21,7 @@ case "$1" in
 	
 	arm32v7)
 		docker build ./ -t bayrell/alpine_php_fpm:7.3-$VERSION-arm32v7 --file Dockerfile --build-arg ARCH=arm32v7/
-		docker push bayrell/alpine_php_fpm:7.3-$VERSION-amd64
+		docker push bayrell/alpine_php_fpm:7.3-$VERSION-arm32v7
 	;;
 	
 	manifest)
