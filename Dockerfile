@@ -1,8 +1,20 @@
-FROM bayrell/alpine:3.11
+FROM --platform=$BUILDPLATFORM alpine:3.11
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+
+RUN cd ~; \
+	echo "" > /etc/apk/repositories; \
+	echo "https://mirror.yandex.ru/mirrors/alpine/v3.11/main" >> /etc/apk/repositories; \
+	echo "https://mirror.yandex.ru/mirrors/alpine/v3.11/community" >> /etc/apk/repositories; \
+	apk update; \
+	apk add bash nano mc wget net-tools pv zip unzip supervisor procps grep; \
+	rm -rf /var/cache/apk/*; \
+	echo "export EDITOR=nano" > /etc/profile.d/editor_nano; \
+	echo "Ok"
 
 RUN cd ~; \
 	apk update; \
-	apk add php7 php7-fpm php7-json php7-mbstring php7-openssl php7-session php7-pdo_mysql nginx; \
+	apk add php7 php7-fpm php7-json php7-mbstring php7-openssl php7-session php7-pdo_mysql php7-curl curl nginx; \
 	rm -rf /var/cache/apk/*; \
 	addgroup -g 800 -S www; \
 	adduser -D -H -S -G www -u 800 www; \
@@ -46,4 +58,7 @@ RUN cd ~; \
 	cp -rf /src/files/var/* /var/; \
 	rm -rf /src/files; \
 	chmod +x /root/run.sh; \
-	echo 'Ok'	
+	echo 'Ok'
+
+VOLUME /data
+CMD ["/root/run.sh"]
