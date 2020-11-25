@@ -5,35 +5,39 @@ SCRIPT_PATH=`dirname $SCRIPT`
 BASE_PATH=`dirname $SCRIPT_PATH`
 
 RETVAL=0
-VERSION=1
+VERSION=7.3
+SUBVERSION=2
 TAG=`date '+%Y%m%d_%H%M%S'`
 
 case "$1" in
 	
 	test)
-		docker build ./ -t bayrell/alpine_php_fpm:7.3-$VERSION-$TAG --file Dockerfile
+		docker build ./ -t bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-$TAG --file Dockerfile
 	;;
 	
 	amd64)
-		docker build ./ -t bayrell/alpine_php_fpm:7.3-$VERSION-amd64 --file Dockerfile --build-arg ARCH=amd64/
-		docker push bayrell/alpine_php_fpm:7.3-$VERSION-amd64
+		docker build ./ -t bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64 \
+			--file Dockerfile --build-arg ARCH=-amd64
 	;;
 	
 	arm32v7)
-		docker build ./ -t bayrell/alpine_php_fpm:7.3-$VERSION-arm32v7 --file Dockerfile --build-arg ARCH=arm32v7/
-		docker push bayrell/alpine_php_fpm:7.3-$VERSION-arm32v7
+		docker build ./ -t bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7 \
+			--file Dockerfile --build-arg ARCH=-arm32v7
 	;;
 	
 	manifest)
-		docker manifest create bayrell/alpine_php_fpm:7.3-$VERSION \
-			--amend bayrell/alpine_php_fpm:7.3-$VERSION-amd64 \
-			--amend bayrell/alpine_php_fpm:7.3-$VERSION-arm32v7
-		docker manifest push bayrell/alpine_php_fpm:7.3-$VERSION
+		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64
+		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7
 		
-		docker manifest create bayrell/alpine_php_fpm:7.3 \
-			--amend bayrell/alpine_php_fpm:7.3-$VERSION-amd64 \
-			--amend bayrell/alpine_php_fpm:7.3-$VERSION-arm32v7
-		docker manifest push bayrell/alpine_php_fpm:7.3
+		docker manifest create bayrell/alpine_php_fpm:$VERSION-$SUBVERSION \
+			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64 \
+			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7
+		docker manifest push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION
+		
+		docker manifest create bayrell/alpine_php_fpm:$VERSION \
+			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64 \
+			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7
+		docker manifest push bayrell/alpine_php_fpm:$VERSION
 	;;
 	
 	all)
