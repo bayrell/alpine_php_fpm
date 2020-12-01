@@ -26,6 +26,8 @@ case "$1" in
 	;;
 	
 	manifest)
+		rm -rf ~/.docker/manifests/docker.io_bayrell_alpine_php_fpm-*
+		
 		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64
 		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7
 		
