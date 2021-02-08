@@ -5,8 +5,8 @@ SCRIPT_PATH=`dirname $SCRIPT`
 BASE_PATH=`dirname $SCRIPT_PATH`
 
 RETVAL=0
-VERSION=7.3
-SUBVERSION=3
+VERSION=7.4
+SUBVERSION=1
 TAG=`date '+%Y%m%d_%H%M%S'`
 
 case "$1" in

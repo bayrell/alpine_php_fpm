@@ -1,5 +1,5 @@
 ARG ARCH=
-FROM bayrell/alpine:3.11-1${ARCH}
+FROM bayrell/alpine:3.13-1${ARCH}
 
 RUN cd ~; \
 	apk update; \
@@ -40,7 +40,7 @@ RUN cd ~; \
 	
 ADD files /src/files
 RUN cd ~; \
-	rm -f /etc/nginx/conf.d/default.conf; \
+	rm -f /etc/nginx/http.d/default.conf; \
 	cp -rf /src/files/etc/* /etc/; \
 	cp -rf /src/files/root/* /root/; \
 	cp -rf /src/files/usr/* /usr/; \
