@@ -3,7 +3,7 @@ FROM bayrell/alpine:3.13-1${ARCH}
 
 RUN cd ~; \
 	apk update; \
-	apk add php7 php7-fpm php7-json php7-mbstring php7-openssl php7-session php7-pdo_mysql php7-curl php7-phar php7-bcmath php7-sockets curl nginx; \
+	apk add php7 php7-fpm php7-json php7-mbstring php7-openssl php7-session php7-pdo_mysql php7-curl php7-phar php7-bcmath php7-sockets php7-mysqlnd php7-mysqli curl nginx; \
 	rm -rf /var/cache/apk/*; \
 	addgroup -g 800 -S www; \
 	adduser -D -H -S -G www -u 800 www; \
