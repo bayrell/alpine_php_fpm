@@ -26,6 +26,7 @@ RUN cd ~; \
 	echo 'php_admin_value[error_log] = /var/log/nginx/php_error.log' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[memory_limit] = 128M' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[post_max_size] = 128M' >> /etc/php7/php-fpm.d/www.conf; \
+	echo 'php_admin_value[upload_max_filesize] = 128M' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[file_uploads] = on' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[upload_tmp_dir] = /tmp' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[precision] = 16' >> /etc/php7/php-fpm.d/www.conf; \
