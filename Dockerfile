@@ -23,6 +23,7 @@ RUN cd ~; \
 	sed -i 's|user = .*|user = www|g' /etc/php7/php-fpm.d/www.conf; \
 	sed -i 's|group = .*|group = www|g' /etc/php7/php-fpm.d/www.conf; \
 	sed -i 's|;clear_env =.*|clear_env = no|g' /etc/php7/php-fpm.d/www.conf; \
+	sed -i 's|;catch_workers_output =.*|catch_workers_output = yes|g' /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[error_log] = /var/log/nginx/php_error.log' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[memory_limit] = 128M' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[post_max_size] = 128M' >> /etc/php7/php-fpm.d/www.conf; \
@@ -34,9 +35,9 @@ RUN cd ~; \
 	echo 'php_admin_value[session.save_path] = /data/php/session' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[soap.wsdl_cache_dir] = /data/php/wsdlcache' >> /etc/php7/php-fpm.d/www.conf; \
 	ln -sf /dev/stdout /var/log/nginx/access.log; \
-	ln -sf /dev/stdout /var/log/nginx/error.log; \
+	ln -sf /dev/stderr /var/log/nginx/error.log; \
 	ln -sf /dev/stdout /var/log/nginx/php_error.log; \
-	ln -sf /dev/stdout /var/log/php7/error.log; \
+	ln -sf /dev/stderr /var/log/php7/error.log; \
 	echo 'Ok'
 	
 ADD files /src/files
