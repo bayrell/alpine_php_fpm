@@ -9,8 +9,7 @@ RUN cd ~; \
 	adduser -D -H -S -G www -u 800 www; \
 	adduser nginx www; \
 	chown -R www:www /var/log/nginx; \
-	mkdir -p /home/www; \
-	chown -R www:www /home/www; \
+	ln -s /data/home /home/www; \
 	echo 'Ok'
 	
 RUN cd ~; \
