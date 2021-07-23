@@ -1,5 +1,5 @@
 ARG ARCH=
-FROM bayrell/alpine:3.12-2${ARCH}
+FROM docker.io/bayrell/alpine:3.14-1${ARCH}
 
 RUN cd ~; \
 	apk update; \
