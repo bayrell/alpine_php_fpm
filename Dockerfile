@@ -35,10 +35,10 @@ RUN cd ~; \
 	echo 'php_admin_value[max_execution_time] = 30' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[session.save_path] = /data/php/session' >> /etc/php7/php-fpm.d/www.conf; \
 	echo 'php_admin_value[soap.wsdl_cache_dir] = /data/php/wsdlcache' >> /etc/php7/php-fpm.d/www.conf; \
-	ln -sf /dev/stdout /var/log/nginx/access.log; \
-	ln -sf /dev/stderr /var/log/nginx/error.log; \
-	ln -sf /dev/stdout /var/log/nginx/php_error.log; \
-	ln -sf /dev/stderr /var/log/php7/error.log; \
+	ln -sf /proc/1/fd/1 /var/log/nginx/access.log; \
+	ln -sf /proc/1/fd/2 /var/log/nginx/php_error.log; \
+	ln -sf /proc/1/fd/2 /var/log/nginx/error.log; \
+	ln -sf /proc/1/fd/2 /var/log/php7/error.log; \
 	echo 'Ok'
 	
 ADD files /src/files

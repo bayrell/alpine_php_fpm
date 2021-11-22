@@ -8,6 +8,3 @@ fi
 if [ ! -z $DOCUMENT_ROOT ]; then
 	sed -i "s|root /var/www/html;|root $DOCUMENT_ROOT;|g" /etc/nginx/sites-available/99-app.conf
 fi
-if [ ! -z $TZ ]; then
-	sed -i "s|date.timezone = .*|date.timezone = $TZ|g" /etc/php7/php.ini
-fi
