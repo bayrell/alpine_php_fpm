@@ -3,7 +3,7 @@ FROM docker.io/bayrell/alpine:3.14-2${ARCH}
 
 RUN cd ~; \
 	apk update; \
-	apk add php7 php7-fpm php7-json php7-mbstring php7-openssl php7-session php7-pdo_mysql php7-curl php7-phar php7-bcmath php7-sockets php7-mysqlnd php7-mysqli php7-soap curl nginx; \
+	apk add php7 php7-fpm php7-json php7-mbstring php7-openssl php7-session php7-pdo_mysql php7-curl php7-phar php7-bcmath php7-sockets php7-mysqlnd php7-mysqli php7-soap php7-pecl-mongodb php7-ctype curl nginx; \
 	rm -rf /var/cache/apk/*; \
 	addgroup -g 800 -S www; \
 	adduser -D -H -S -G www -u 800 www; \
