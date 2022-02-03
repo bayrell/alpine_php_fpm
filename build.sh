@@ -33,9 +33,17 @@ case "$1" in
 	manifest)
 		rm -rf ~/.docker/manifests/docker.io_bayrell_alpine_php_fpm-*
 		
+		docker tag bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64 bayrell/alpine_php_fpm:$VERSION-amd64
+		docker tag bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm64v8 bayrell/alpine_php_fpm:$VERSION-arm64v8
+		docker tag bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7 bayrell/alpine_php_fpm:$VERSION-arm32v7
+		
 		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64
 		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm64v8
 		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7
+		
+		docker push bayrell/alpine_php_fpm:$VERSION-amd64
+		docker push bayrell/alpine_php_fpm:$VERSION-arm64v8
+		docker push bayrell/alpine_php_fpm:$VERSION-arm32v7
 		
 		docker manifest create bayrell/alpine_php_fpm:$VERSION-$SUBVERSION \
 			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64 \
@@ -44,9 +52,9 @@ case "$1" in
 		docker manifest push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION
 		
 		docker manifest create bayrell/alpine_php_fpm:$VERSION \
-			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64 \
-			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm64v8 \
-			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7
+			--amend bayrell/alpine_php_fpm:$VERSION-amd64 \
+			--amend bayrell/alpine_php_fpm:$VERSION-arm64v8 \
+			--amend bayrell/alpine_php_fpm:$VERSION-arm32v7
 		docker manifest push bayrell/alpine_php_fpm:$VERSION
 	;;
 	
