@@ -7,55 +7,56 @@ BASE_PATH=`dirname $SCRIPT_PATH`
 RETVAL=0
 VERSION=7.4
 SUBVERSION=7
+IMAGE_NAME="alpine_php_fpm"
 TAG=`date '+%Y%m%d_%H%M%S'`
 
 case "$1" in
 	
 	test)
-		docker build ./ -t bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-$TAG --file Dockerfile
+		docker build ./ -t bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-$TAG --file Dockerfile
 	;;
 	
 	amd64)
-		docker build ./ -t bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64 \
+		docker build ./ -t bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-amd64 \
 			--file Dockerfile --build-arg ARCH=-amd64
 	;;
 	
 	arm64v8)
-		docker build ./ -t bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm64v8 \
+		docker build ./ -t bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-arm64v8 \
 			--file Dockerfile --build-arg ARCH=-arm64v8
 	;;
 	
 	arm32v7)
-		docker build ./ -t bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7 \
+		docker build ./ -t bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-arm32v7 \
 			--file Dockerfile --build-arg ARCH=-arm32v7
 	;;
 	
 	manifest)
-		rm -rf ~/.docker/manifests/docker.io_bayrell_alpine_php_fpm-*
+		rm -rf ~/.docker/manifests/docker.io_bayrell_$IMAGE_NAME-*
 		
-		docker tag bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64 bayrell/alpine_php_fpm:$VERSION-amd64
-		docker tag bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm64v8 bayrell/alpine_php_fpm:$VERSION-arm64v8
-		docker tag bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7 bayrell/alpine_php_fpm:$VERSION-arm32v7
+		docker tag bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-amd64 bayrell/$IMAGE_NAME:$VERSION-amd64
+		docker tag bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-arm64v8 bayrell/$IMAGE_NAME:$VERSION-arm64v8
+		docker tag bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-arm32v7 bayrell/$IMAGE_NAME:$VERSION-arm32v7
 		
-		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64
-		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm64v8
-		docker push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7
+		docker push bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-amd64
+		docker push bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-arm64v8
+		docker push bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-arm32v7
 		
-		docker push bayrell/alpine_php_fpm:$VERSION-amd64
-		docker push bayrell/alpine_php_fpm:$VERSION-arm64v8
-		docker push bayrell/alpine_php_fpm:$VERSION-arm32v7
+		docker push bayrell/$IMAGE_NAME:$VERSION-amd64
+		docker push bayrell/$IMAGE_NAME:$VERSION-arm64v8
+		docker push bayrell/$IMAGE_NAME:$VERSION-arm32v7
 		
-		docker manifest create bayrell/alpine_php_fpm:$VERSION-$SUBVERSION \
-			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-amd64 \
-			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm64v8 \
-			--amend bayrell/alpine_php_fpm:$VERSION-$SUBVERSION-arm32v7
-		docker manifest push bayrell/alpine_php_fpm:$VERSION-$SUBVERSION
+		docker manifest create bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION \
+			--amend bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-amd64 \
+			--amend bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-arm64v8 \
+			--amend bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION-arm32v7
+		docker manifest push bayrell/$IMAGE_NAME:$VERSION-$SUBVERSION
 		
-		docker manifest create bayrell/alpine_php_fpm:$VERSION \
-			--amend bayrell/alpine_php_fpm:$VERSION-amd64 \
-			--amend bayrell/alpine_php_fpm:$VERSION-arm64v8 \
-			--amend bayrell/alpine_php_fpm:$VERSION-arm32v7
-		docker manifest push bayrell/alpine_php_fpm:$VERSION
+		docker manifest create bayrell/$IMAGE_NAME:$VERSION \
+			--amend bayrell/$IMAGE_NAME:$VERSION-amd64 \
+			--amend bayrell/$IMAGE_NAME:$VERSION-arm64v8 \
+			--amend bayrell/$IMAGE_NAME:$VERSION-arm32v7
+		docker manifest push bayrell/$IMAGE_NAME:$VERSION
 	;;
 	
 	all)
