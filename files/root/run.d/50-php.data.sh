@@ -17,3 +17,8 @@ fi
 if [ ! -z $TZ ]; then
 	sed -i "s|date.timezone = .*|date.timezone = $TZ|g" /etc/php7/php.ini
 fi
+if [ ! -z $PHP_TIME_LIMIT ]; then
+	sed -i "s|php_admin_value\[max_execution_time\] = .*|php_admin_value[max_execution_time] = $PHP_TIME_LIMIT|g" /etc/php7/php-fpm.d/www.conf
+	sed -i "s|max_execution_time = .*|max_execution_time = $PHP_TIME_LIMIT|g" /etc/php7/php.ini
+	echo "fastcgi_read_timeout $PHP_TIME_LIMIT;" >> /etc/nginx/fastcgi_params
+fi

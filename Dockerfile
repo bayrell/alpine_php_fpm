@@ -4,7 +4,7 @@ FROM docker.io/bayrell/alpine:3.14${ARCH}
 RUN cd ~; \
 	apk update; \
 	apk upgrade; \
-	apk add php7 php7-fpm php7-json php7-mbstring php7-openssl php7-session php7-pdo_mysql php7-curl php7-phar php7-bcmath php7-sockets php7-mysqlnd php7-mysqli php7-soap php7-pecl-mongodb php7-ctype curl nginx mysql-client; \
+	apk add php7 php7-fpm php7-json php7-mbstring php7-openssl php7-session php7-pdo_mysql php7-curl php7-phar php7-bcmath php7-sockets php7-mysqlnd php7-mysqli php7-soap php7-pecl-mongodb php7-ctype php7-dom php7-gd php7-exif php7-fileinfo php7-pecl-imagick php7-zip php7-iconv php7-xml php7-xmlrpc php7-xmlreader php7-simplexml php7-xmlwriter php7-opcache php7-pecl-apcu php7-pecl-mcrypt curl nginx mysql-client; \
 	rm -rf /var/cache/apk/*; \
 	addgroup -g 800 -S www; \
 	adduser -D -H -S -G www -u 800 -h /data/home www; \
@@ -44,6 +44,7 @@ RUN cd ~; \
 ADD files /src/files
 RUN cd ~; \
 	rm -f /etc/nginx/conf.d/default.conf; \
+	rm -f /etc/nginx/fastcgi.conf; \
 	cp -rf /src/files/etc/* /etc/; \
 	cp -rf /src/files/root/* /root/; \
 	cp -rf /src/files/usr/* /usr/; \
