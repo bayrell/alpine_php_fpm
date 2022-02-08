@@ -22,3 +22,16 @@ if [ ! -z $PHP_TIME_LIMIT ]; then
 	sed -i "s|max_execution_time = .*|max_execution_time = $PHP_TIME_LIMIT|g" /etc/php7/php.ini
 	echo "fastcgi_read_timeout $PHP_TIME_LIMIT;" >> /etc/nginx/fastcgi_params
 fi
+if [ ! -z $MEMORY_LIMIT ]; then
+	sed -i "s|memory_limit = .*|memory_limit = ${MEMORY_LIMIT}M|g" /etc/php7/php.ini
+	sed -i "s|php_admin_value\[memory_limit\] = .*|php_admin_value[memory_limit] = ${MEMORY_LIMIT}M|g" /etc/php7/php-fpm.d/www.conf
+fi
+if [ ! -z $MAX_UPLOAD_SIZE ]; then
+	sed -i "s|upload_max_filesize = .*|upload_max_filesize = ${MAX_UPLOAD_SIZE}M|g" /etc/php7/php.ini
+	sed -i "s|php_admin_value\[upload_max_filesize\] = .*|php_admin_value[upload_max_filesize] = ${MAX_UPLOAD_SIZE}M|g" /etc/php7/php-fpm.d/www.conf
+	sed -i "s|client_max_body_size .*|client_max_body_size ${MAX_UPLOAD_SIZE}m;|g" /etc/nginx/conf.d/10-connection.conf
+fi
+if [ ! -z $POST_MAX_SIZE ]; then
+	sed -i "s|post_max_size = .*|post_max_size = ${MAX_UPLOAD_SIZE}M|g" /etc/php7/php.ini
+	sed -i "s|php_admin_value\[post_max_size\] = .*|php_admin_value[post_max_size] = ${MAX_UPLOAD_SIZE}M|g" /etc/php7/php-fpm.d/www.conf
+fi
