@@ -1,10 +1,13 @@
-ARG ARCH=
-FROM docker.io/bayrell/alpine:3.14${ARCH}
+ARG ARCH=amd64
+FROM docker.io/bayrell/alpine:3.14-${ARCH}
+
+ARG ARCH
+ENV ARCH=${ARCH}
 
 RUN cd ~; \
 	apk update; \
 	apk upgrade; \
-	apk add php8 php8-fpm php8-json php8-mbstring php8-openssl php8-session php8-pdo_mysql php8-curl php8-phar php8-bcmath php8-sockets php8-mysqlnd php8-mysqli php8-soap php8-pecl-mongodb php8-ctype php8-dom php8-gd php8-exif php8-fileinfo php8-pecl-imagick php8-zip php8-iconv php8-xml php8-xmlreader php8-simplexml php8-xmlwriter php8-opcache php8-pecl-apcu php8-pecl-mcrypt php8-intl curl nginx mysql-client; \
+	apk add php8 php8-fpm php8-json php8-mbstring php8-openssl php8-session php8-pdo_mysql php8-curl php8-phar php8-bcmath php8-sockets php8-mysqlnd php8-mysqli php8-soap php8-pecl-mongodb php8-ctype php8-dom php8-gd php8-exif php8-fileinfo php8-pecl-imagick php8-zip php8-iconv php8-xml php8-xmlreader php8-simplexml php8-xmlwriter php8-opcache php8-pecl-apcu php8-pecl-mcrypt php8-intl php8-tokenizer curl nginx mysql-client; \
 	rm -rf /var/cache/apk/*; \
 	addgroup -g 800 -S www; \
 	adduser -D -H -S -G www -u 800 -h /data/home www; \
@@ -39,6 +42,7 @@ RUN cd ~; \
 	ln -sf /proc/1/fd/1 /var/log/nginx/access.log; \
 	ln -sf /proc/1/fd/2 /var/log/nginx/error.log; \
 	ln -sf /proc/1/fd/2 /var/log/php8/error.log; \
+	ln -s /usr/bin/php8 /usr/bin/php; \
 	echo 'Ok'
 	
 ADD files /src/files
