@@ -14,10 +14,16 @@ RUN cd ~; \
 	apk add php8 php8-fpm php8-json php8-mbstring php8-openssl php8-session php8-pdo_mysql php8-curl php8-phar php8-bcmath php8-sockets php8-mysqlnd php8-mysqli php8-soap php8-pecl-mongodb php8-ctype php8-dom php8-gd php8-exif php8-fileinfo php8-pecl-imagick php8-zip php8-iconv php8-xml php8-xmlreader php8-simplexml php8-xmlwriter php8-opcache php8-pecl-apcu php8-pecl-mcrypt php8-intl php8-tokenizer curl openresty mysql-client; \
 	ln -s /usr/bin/openresty /usr/sbin/nginx; \
 	rm -rf /var/cache/apk/*; \
+	addgroup -S nginx; \
+	adduser -D -H -S -G nginx -h /var/lib/nginx -s /sbin/nologin nginx; \
 	addgroup -g 800 -S www; \
 	adduser -D -H -S -G www -u 800 -h /data/home www; \
 	adduser nginx www; \
 	chown -R www:www /var/log/nginx; \
+	mkdir -p /etc/nginx; \
+	cp -rf /usr/local/openresty/nginx/conf/* /etc/nginx/; \
+	rm -rf /usr/local/openresty/nginx/conf; \
+	ln -s /etc/nginx /usr/local/openresty/nginx/conf; \
 	echo 'Ok'
 	
 RUN cd ~; \
@@ -44,6 +50,9 @@ RUN cd ~; \
 	echo 'php_admin_value[max_execution_time] = 30' >> /etc/php8/php-fpm.d/www.conf; \
 	echo 'php_admin_value[session.save_path] = /data/php/session' >> /etc/php8/php-fpm.d/www.conf; \
 	echo 'php_admin_value[soap.wsdl_cache_dir] = /data/php/wsdlcache' >> /etc/php8/php-fpm.d/www.conf; \
+	mkdir /var/log/nginx; \
+	rm -rf /usr/local/openresty/nginx/logs; \
+	ln -s /var/log/nginx /usr/local/openresty/nginx/logs; \
 	ln -sf /proc/1/fd/1 /var/log/nginx/access.log; \
 	ln -sf /proc/1/fd/2 /var/log/nginx/error.log; \
 	ln -sf /proc/1/fd/2 /var/log/php8/error.log; \
@@ -52,14 +61,6 @@ RUN cd ~; \
 	
 COPY files /
 RUN cd ~; \
-	ln -s /etc/nginx/conf.d /usr/local/openresty/nginx/conf/conf.d; \
-	ln -s /etc/nginx/domains /usr/local/openresty/nginx/conf/domains; \
-	ln -s /etc/nginx/inc /usr/local/openresty/nginx/conf/inc; \
-	ln -s /etc/nginx/modules /usr/local/openresty/nginx/conf/modules; \
-	ln -s /etc/nginx/sites-available /usr/local/openresty/nginx/conf/sites-available; \
-	ln -s /etc/nginx/sites-enabled /usr/local/openresty/nginx/conf/sites-enabled; \
-	cp /etc/nginx/proxy_params /usr/local/openresty/nginx/conf; \
-	rm -f /etc/nginx/conf.d/default.conf; \
 	rm -f /etc/nginx/fastcgi.conf; \
 	chmod +x /root/run.sh; \
 	echo 'Ok'
