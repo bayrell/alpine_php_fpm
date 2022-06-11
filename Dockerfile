@@ -5,9 +5,14 @@ ARG ARCH
 ENV ARCH=${ARCH}
 
 RUN cd ~; \
+	wget 'http://openresty.org/package/admin@openresty.com-5ea678a6.rsa.pub' -O "/etc/apk/keys/admin@openresty.com-5ea678a6.rsa.pub"; \
+	. /etc/os-release; \
+	MAJOR_VER=`echo $VERSION_ID | sed 's/\.[0-9]\+$//'`; \
+	echo "http://openresty.org/package/alpine/v$MAJOR_VER/main" >> /etc/apk/repositories; \
 	apk update; \
 	apk upgrade; \
-	apk add php8 php8-fpm php8-json php8-mbstring php8-openssl php8-session php8-pdo_mysql php8-curl php8-phar php8-bcmath php8-sockets php8-mysqlnd php8-mysqli php8-soap php8-pecl-mongodb php8-ctype php8-dom php8-gd php8-exif php8-fileinfo php8-pecl-imagick php8-zip php8-iconv php8-xml php8-xmlreader php8-simplexml php8-xmlwriter php8-opcache php8-pecl-apcu php8-pecl-mcrypt php8-intl php8-tokenizer curl nginx mysql-client; \
+	apk add php8 php8-fpm php8-json php8-mbstring php8-openssl php8-session php8-pdo_mysql php8-curl php8-phar php8-bcmath php8-sockets php8-mysqlnd php8-mysqli php8-soap php8-pecl-mongodb php8-ctype php8-dom php8-gd php8-exif php8-fileinfo php8-pecl-imagick php8-zip php8-iconv php8-xml php8-xmlreader php8-simplexml php8-xmlwriter php8-opcache php8-pecl-apcu php8-pecl-mcrypt php8-intl php8-tokenizer curl openresty mysql-client; \
+	ln -s /usr/bin/openresty /usr/sbin/nginx; \
 	rm -rf /var/cache/apk/*; \
 	addgroup -g 800 -S www; \
 	adduser -D -H -S -G www -u 800 -h /data/home www; \
@@ -45,14 +50,16 @@ RUN cd ~; \
 	ln -s /usr/bin/php8 /usr/bin/php; \
 	echo 'Ok'
 	
-ADD files /src/files
+COPY files /
 RUN cd ~; \
+	ln -s /etc/nginx/conf.d /usr/local/openresty/nginx/conf/conf.d; \
+	ln -s /etc/nginx/domains /usr/local/openresty/nginx/conf/domains; \
+	ln -s /etc/nginx/inc /usr/local/openresty/nginx/conf/inc; \
+	ln -s /etc/nginx/modules /usr/local/openresty/nginx/conf/modules; \
+	ln -s /etc/nginx/sites-available /usr/local/openresty/nginx/conf/sites-available; \
+	ln -s /etc/nginx/sites-enabled /usr/local/openresty/nginx/conf/sites-enabled; \
+	cp /etc/nginx/proxy_params /usr/local/openresty/nginx/conf; \
 	rm -f /etc/nginx/conf.d/default.conf; \
 	rm -f /etc/nginx/fastcgi.conf; \
-	cp -rf /src/files/etc/* /etc/; \
-	cp -rf /src/files/root/* /root/; \
-	cp -rf /src/files/usr/* /usr/; \
-	cp -rf /src/files/var/* /var/; \
-	rm -rf /src/files; \
 	chmod +x /root/run.sh; \
 	echo 'Ok'
