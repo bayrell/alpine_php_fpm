@@ -9,7 +9,6 @@
 	<date>2022-05-16T20:24:00+06:00</date>
 	<arch>amd64</arch>
 	<arch>arm64v8</arch>
-	<arch>arm32v7</arch>
 	<link name="Docker hub">https://hub.docker.com/r/bayrell/alpine_php_fpm</link>
 	<link name="Github">https://github.com/bayrell-os/alpine_php_fpm</link>
 	<xml name="bayrell.org" priority="10">https://cloud.bayrell.org/marketplace/org.bayrell.alpine_php_fpm.xml</xml>
