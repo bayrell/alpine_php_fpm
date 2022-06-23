@@ -2,17 +2,17 @@
 <template>
 	<uid>org.bayrell.alpine_php_fpm</uid>
 	<name>PHP-FPM alpine</name>
-	<version>7.4-9</version>
+	<version>7.4-10</version>
 	<maintainer>Ildar &lt;ildar@bayrell.org&gt;</maintainer>
 	<marketplace>https://cloud.bayrell.org/</marketplace>
 	<link name="Docker hub">https://hub.docker.com/r/bayrell/alpine_php_fpm</link>
 	<link name="Github">https://github.com/bayrell-os/alpine_php_fpm</link>
-	<xml name="bayrell.org">https://cloud.bayrell.org/marketplace/org.bayrell.alpine_php_fpm.xml</xml>
-	<xml name="github.com">https://raw.githubusercontent.com/bayrell-os/alpine_php_fpm/branch_7.4/org.bayrell.alpine_php_fpm.xml</xml>
+	<xml name="bayrell.org" priority="20">https://cloud.bayrell.org/marketplace/org.bayrell.alpine_php_fpm.xml</xml>
+	<xml name="github.com" priority="10">https://raw.githubusercontent.com/bayrell-os/alpine_php_fpm/branch_7.4/org.bayrell.alpine_php_fpm.xml</xml>
 	<yaml>
 		<services>
 			<_var_app_name_>
-				<image>docker.io/bayrell/alpine_php_fpm:7.4-9</image>
+				<image>docker.io/bayrell/alpine_php_fpm:7.4-10</image>
 				<hostname>{{.Service.Name}}.{{.Task.ID}}.local</hostname>
 				<environment>
 					<WWW_UID>_var_www_uid_</WWW_UID>

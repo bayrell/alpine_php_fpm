@@ -50,5 +50,6 @@ RUN cd ~; \
 	cp -rf /src/files/usr/* /usr/; \
 	cp -rf /src/files/var/* /var/; \
 	rm -rf /src/files; \
+	chown -R www:www /var/www; \
 	chmod +x /root/run.sh; \
 	echo 'Ok'
