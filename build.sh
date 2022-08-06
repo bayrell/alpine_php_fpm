@@ -13,25 +13,25 @@ TAG=`date '+%Y%m%d_%H%M%S'`
 case "$1" in
 	
 	test)
-		docker build ./ -t $IMAGE_NAME:$VERSION.$SUBVERSION-$TAG
-			--file Dockerfile --build-arg ARCH=-amd64
-		docker tag $IMAGE_NAME:$VERSION.$SUBVERSION-$TAG $IMAGE_NAME:$VERSION.$SUBVERSION
-		docker tag $IMAGE_NAME:$VERSION.$SUBVERSION-$TAG $IMAGE_NAME:$VERSION
+		docker build ./ -t $IMAGE_NAME:$VERSION-$SUBVERSION-$TAG \
+			--file Dockerfile --build-arg ARCH=amd64
+		docker tag $IMAGE_NAME:$VERSION-$SUBVERSION-$TAG $IMAGE_NAME:$VERSION-$SUBVERSION
+		docker tag $IMAGE_NAME:$VERSION-$SUBVERSION-$TAG $IMAGE_NAME:$VERSION
 	;;
 	
 	amd64)
 		docker build ./ -t $IMAGE_NAME:$VERSION-$SUBVERSION-amd64 \
-			--file Dockerfile --build-arg ARCH=-amd64
+			--file Dockerfile --build-arg ARCH=amd64
 	;;
 	
 	arm64v8)
 		docker build ./ -t $IMAGE_NAME:$VERSION-$SUBVERSION-arm64v8 \
-			--file Dockerfile --build-arg ARCH=-arm64v8
+			--file Dockerfile --build-arg ARCH=arm64v8
 	;;
 	
 	arm32v7)
 		docker build ./ -t $IMAGE_NAME:$VERSION-$SUBVERSION-arm32v7 \
-			--file Dockerfile --build-arg ARCH=-arm32v7
+			--file Dockerfile --build-arg ARCH=arm32v7
 	;;
 	
 	manifest)

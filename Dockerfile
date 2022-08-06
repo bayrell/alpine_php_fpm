@@ -1,5 +1,5 @@
 ARG ARCH=
-FROM ${ARCH}alpine:3.8
+FROM ${ARCH}/alpine:3.8
 
 RUN cd ~; \
 	echo "" > /etc/apk/repositories; \
