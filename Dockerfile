@@ -14,7 +14,7 @@ RUN cd ~; \
 
 RUN cd ~; \
 	apk update; \
-	apk add php5 php5-fpm php5-json php5-openssl php5-pdo_mysql php5-curl php5-phar php5-bcmath php5-sockets php5-mysqli php5-soap php5-ctype php5-iconv curl nginx mysql-client; \
+	apk add php5 php5-fpm php5-json php5-openssl php5-pdo_mysql php5-curl php5-phar php5-bcmath php5-sockets php5-mysqli php5-soap php5-ctype php5-iconv php5-dom curl nginx mysql-client; \
 	rm -rf /var/cache/apk/*; \
 	addgroup -g 1000 -S www; \
 	adduser -D -H -S -G www -u 1000 www; \
