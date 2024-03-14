@@ -2,9 +2,6 @@ ARG ARCH=
 FROM ${ARCH}/alpine:3.8
 
 RUN cd ~; \
-	echo "" > /etc/apk/repositories; \
-	echo "https://mirror.yandex.ru/mirrors/alpine/v3.8/main" >> /etc/apk/repositories; \
-	echo "https://mirror.yandex.ru/mirrors/alpine/v3.8/community" >> /etc/apk/repositories; \
 	apk update; \
 	apk upgrade; \
 	apk add bash nano mc wget net-tools pv zip unzip supervisor procps grep sudo; \
