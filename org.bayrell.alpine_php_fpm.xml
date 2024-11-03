@@ -2,26 +2,23 @@
 <template>
 	<uid>org.bayrell.alpine_php_fpm</uid>
 	<name>PHP-FPM alpine</name>
-	<version>8.0-2</version>
-	<branch>8.0</branch>
+	<version>8.3-1</version>
+	<branch>8.3</branch>
 	<maintainer>Ildar &lt;ildar@bayrell.org&gt;</maintainer>
 	<marketplace>https://cloud.bayrell.org/</marketplace>
-	<date>2022-09-19T23:57:00+06:00</date>
+	<date>2024-11-04T00:49:00+06:00</date>
 	<arch>amd64</arch>
 	<arch>arm64v8</arch>
 	<arch>arm32v7</arch>
 	<link name="Docker hub">https://hub.docker.com/r/bayrell/alpine_php_fpm</link>
 	<link name="Github">https://github.com/bayrell-os/alpine_php_fpm</link>
-	<xml name="bayrell.org">https://cloud.bayrell.org/marketplace/org.bayrell.alpine_php_fpm.xml</xml>
-	<xml name="github.com">https://raw.githubusercontent.com/bayrell-os/alpine_php_fpm/branch_8.0/org.bayrell.alpine_php_fpm.xml</xml>
+	<xml name="github.com">https://raw.githubusercontent.com/bayrell-os/alpine_php_fpm/branch_8.3/org.bayrell.alpine_php_fpm.xml</xml>
 	<yaml>
 		<services>
 			<_var_app_name_>
 				<image>docker.io/bayrell/alpine_php_fpm:8.0-2</image>
 				<hostname>{{.Service.Name}}.{{.Task.ID}}.local</hostname>
 				<environment>
-					<WWW_UID>_var_www_uid_</WWW_UID>
-					<WWW_GID>_var_www_gid_</WWW_GID>
 					<DOCUMENT_ROOT>_var_folder_document_root_</DOCUMENT_ROOT>
 				</environment>
 				<volumes>_var_app_name_:/data</volumes>
@@ -37,18 +34,6 @@
 			<name>_var_app_name_</name>
 			<label>App name</label>
 			<type>string</type>
-		</variable>
-		<variable>
-			<name>_var_www_uid_</name>
-			<label>www user id</label>
-			<type>string</type>
-			<default>800</default>
-		</variable>
-		<variable>
-			<name>_var_www_gid_</name>
-			<label>www group id</label>
-			<type>string</type>
-			<default>800</default>
 		</variable>
 		<variable>
 			<name>_var_folder_www_</name>
