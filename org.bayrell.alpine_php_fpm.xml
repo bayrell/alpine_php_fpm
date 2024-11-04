@@ -19,6 +19,8 @@
 				<image>docker.io/bayrell/alpine_php_fpm:8.0-2</image>
 				<hostname>{{.Service.Name}}.{{.Task.ID}}.local</hostname>
 				<environment>
+					<WWW_UID>_var_www_uid_</WWW_UID>
+					<WWW_GID>_var_www_gid_</WWW_GID>
 					<DOCUMENT_ROOT>_var_folder_document_root_</DOCUMENT_ROOT>
 				</environment>
 				<volumes>_var_app_name_:/data</volumes>
@@ -34,6 +36,18 @@
 			<name>_var_app_name_</name>
 			<label>App name</label>
 			<type>string</type>
+		</variable>
+		<variable>
+			<name>_var_www_uid_</name>
+			<label>www user id</label>
+			<type>string</type>
+			<default>800</default>
+		</variable>
+		<variable>
+			<name>_var_www_gid_</name>
+			<label>www group id</label>
+			<type>string</type>
+			<default>800</default>
 		</variable>
 		<variable>
 			<name>_var_folder_www_</name>

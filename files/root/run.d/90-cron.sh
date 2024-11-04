@@ -1,0 +1,2 @@
+echo "Start cron"
+crond
