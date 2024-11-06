@@ -16,7 +16,7 @@
 	<yaml>
 		<services>
 			<_var_app_name_>
-				<image>docker.io/bayrell/alpine_php_fpm:8.0-2</image>
+				<image>docker.io/bayrell/alpine_php_fpm:8.3-1</image>
 				<hostname>{{.Service.Name}}.{{.Task.ID}}.local</hostname>
 				<environment>
 					<WWW_UID>_var_www_uid_</WWW_UID>
