@@ -48,8 +48,8 @@ RUN cd ~; \
 RUN cd ~; \
 	mkdir -p /data/home; \
 	chmod 700 /data/home; \
-	addgroup -g 1000 -S user; \
-	adduser -D -S -G user -u 1000 -h /data/home user; \
+	addgroup -g 1000 user; \
+	adduser -D -G user -u 1000 -h /data/home -s /bin/bash user; \
 	adduser user wheel; \
 	echo "Ok"
 

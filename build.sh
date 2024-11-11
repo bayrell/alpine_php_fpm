@@ -6,7 +6,7 @@ BASE_PATH=`dirname $SCRIPT_PATH`
 
 RETVAL=0
 VERSION=8.3
-SUBVERSION=1
+SUBVERSION=2
 IMAGE="alpine_php_fpm"
 TAG=`date '+%Y%m%d_%H%M%S'`
 
